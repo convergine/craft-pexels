@@ -1,0 +1,66 @@
+<div class="modal elementselectormodal">
+    <div class="body">
+        <div class="content">
+            <div class="main">
+                <div class="toolbar flex flex-nowrap">
+                    <div class="flex-grow texticon search icon clearable">
+                        <input type="text" class="text fullwidth pexels-search" autocomplete="off" placeholder="{{ 'Search'|t('app') }}">
+                    </div>
+                    <div class="select">
+                        <select class="pexels-search-orientation">
+                            <option value="">{{ 'Any Orientation'|t('convergine-pexels') }}</option>
+                            <option value="landscape">{{ 'Landscape'|t('convergine-pexels') }}</option>
+                            <option value="portrait">{{ 'Portrait'|t('convergine-pexels') }}</option>
+                            <option value="square">{{ 'Square'|t('convergine-pexels') }}</option>
+                        </select>
+                    </div>
+                    <div class="select">
+                        <select class="pexels-search-size">
+                            <option value="">{{ 'Minimum Size'|t('convergine-pexels') }}</option>
+                            <option value="small">{{ 'Small (4MP)'|t('convergine-pexels') }}</option>
+                            <option value="medium">{{ 'Medium (12MP)'|t('convergine-pexels') }}</option>
+                            <option value="large">{{ 'Large (24MP)'|t('convergine-pexels') }}</option>
+                        </select>
+                    </div>
+                    <div class="select">
+                        <select class="pexels-search-color">
+                            <option value="">{{ 'Predominant Color'|t('convergine-pexels') }}</option>
+                            <option value="red">{{ 'Red'|t('convergine-pexels') }}</option>
+                            <option value="orange">{{ 'Orange'|t('convergine-pexels') }}</option>
+                            <option value="yellow">{{ 'Yellow'|t('convergine-pexels') }}</option>
+                            <option value="green">{{ 'Green'|t('convergine-pexels') }}</option>
+                            <option value="turquoise">{{ 'Turquoise'|t('convergine-pexels') }}</option>
+                            <option value="blue">{{ 'Blue'|t('convergine-pexels') }}</option>
+                            <option value="violet">{{ 'Violet'|t('convergine-pexels') }}</option>
+                            <option value="pink">{{ 'Pink'|t('convergine-pexels') }}</option>
+                            <option value="brown">{{ 'Brown'|t('convergine-pexels') }}</option>
+                            <option value="black">{{ 'Black'|t('convergine-pexels') }}</option>
+                            <option value="gray">{{ 'Gray'|t('convergine-pexels') }}</option>
+                            <option value="white">{{ 'White'|t('convergine-pexels') }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="button" class="btn submit pexels-search-button">Search</button>
+                    </div>
+                </div>
+                <div class="pexels-results">
+                    {{ placeholderText ?? '' }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="buttons left">
+            {% if (logo ?? '') is not empty %}
+                <a href="https://www.pexels.com/" alt="Pexels" title="Pexels" target="_blank" class="pexels-logo">
+                    <img src="{{ logo }}" tabindex="-1">
+                </a>
+            {% endif %}
+            <span class="pexels-selected"></span>
+        </div>
+        <div class="buttons right">
+            <button type="button" class="btn pexels-cancel" tabindex="0">{{ 'Cancel'|t('app') }}</button>
+            <button type="button" class="btn disabled submit pexels-download">{{ 'Download Selected'|t('convergine-pexels') }}</button>
+        </div>
+    </div>
+</div>

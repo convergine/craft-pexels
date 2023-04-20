@@ -1,0 +1,44 @@
+{
+    "name": "convergine/craft-pexels",
+    "description": "This plugin allows searching and downloading photos from \"Pexels.com\"",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "convergine",
+        "pexels",
+        "stock photos",
+        "royalty free photos"
+    ],
+    "support": {
+        "issues": "https://github.com/convergine/craft-pexels/issues?state=open",
+        "source": "https://github.com/convergine/craft-pexels",
+        "docs": "https://github.com/convergine/craft-pexels/blob/master/README.md"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Convergine Corp.",
+            "homepage": "https://www.convergine.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "convergine\\pexels\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Pexels",
+        "handle": "convergine-pexels",
+        "hasCpSettings": true,
+        "hasCpSection": true,
+        "changelogUrl": "https://github.com/convergine/craft-pexels/blob/master/CHANGELOG.md",
+        "class": "convergine\\pexels\\PexelsPlugin"
+    }
+}

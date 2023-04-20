@@ -1,0 +1,131 @@
+{% import "_includes/forms" as forms %}
+<div style="display: flex; flex-direction: column; height: 100%;">
+	<div style="display: flex; margin-top: auto;">
+		<a href="https://www.pexels.com/" target="_blank">
+			<img src="{{ craft.app.assetManager.getPublishedUrl('@convergine/pexels/assets/dist/pexels-display.png', true) }}" alt="Pexels " title="Pexels" width="150">
+		</a>
+	</div>
+	<h2>{{ 'Settings'|t('convergine-pexels') }}</h2>
+	<div class="flex-grow">
+		{{ 'pexelsApiNote'|t('convergine-pexels')|raw }}
+		{% if settings.apiKey is empty %}
+		<p class="error">{{ 'missingApiKey'|t('convergine-pexels') }}</p>
+		{% endif %}
+		<div style="width: 100%; max-width: 500px; margin-top:30px;">
+			{{ forms.textField({
+			label: 'labelApiKey'|t('convergine-pexels'),
+			instructions: 'instructionsApiKey'|t('convergine-pexels', { url: 'https://www.pexels.com/api/' })|raw,
+			id: 'apiKey',
+			name: 'apiKey',
+			value: settings.apiKey,
+			}) }}
+		</div>
+		{% if settings.uploadLocation is empty %}
+		<p class="error">{{ 'missingUploadLocation'|t('convergine-pexels') }}</p>
+		{% endif %}
+		<div style="width: 100%; max-width: 500px; margin-top:30px;">
+			{% set volumes = craft.app.volumes.allVolumes %}
+			{% set selectedUploadLocation = settings.uploadLocation ?? '' %}
+
+			{% set options = [{ label: 'Please Select'|t('convergine-pexels'), value: '' }] %}
+			{% for volume in volumes %}
+			{% set volumePath = 'volumeId:' ~ volume.uid %}
+			{% set options = options|merge([{ label: volume.name, value: volumePath }]) %}
+			{% set folders = craft.app.assets.findFolders({ volumeId: volume.id }) %}
+			{% for folder in folders %}
+			{% set folderPath = volumePath ~ '/folderId:' ~ folder.uid %}
+			{% set options = options|merge([{ label: '- ' ~ folder.name, value: folderPath }]) %}
+			{% endfor %}
+			{% endfor %}
+
+			{{ forms.field({
+			label: 'labelUploadLocation'|t('convergine-pexels'),
+			instructions: 'instructionsUploadLocation'|t('convergine-pexels'),
+			}, forms.select({
+			id: 'uploadLocation',
+			name: 'uploadLocation',
+			options: options,
+			value: selectedUploadLocation,
+			})
+			) }}
+		</div>
+		<div style="width: 100%; max-width: 500px; margin-top:30px;">
+		{% set selectedPicsPerPage = settings.picsPerPage ?? '' %}
+
+		{% set options = [
+		{ label: '15', value: '15' },
+		{ label: '30', value: '30' },
+		{ label: '60', value: '60' },
+		{ label: '80', value: '80' },
+		] %}
+
+		{{ forms.field({
+		label: 'labelPicsPerPage'|t('convergine-pexels'),
+		instructions: 'instructionsPicsPerPage'|t('convergine-pexels')|raw,
+		}, forms.select({
+		id: 'picsPerPage',
+		name: 'picsPerPage',
+		options: options,
+		value: selectedPicsPerPage,
+		})
+		) }}
+		</div>
+		<div style="width: 100%; max-width: 500px; margin-top:30px;">
+			{% set selectedLanguage = settings.langLocale ?? '' %}
+
+			{% set options = [
+			{ label: 'English (US)', value: 'en-US' },
+			{ label: 'Brazilian Portuguese', value: 'pt-BR' },
+			{ label: 'Spanish (Spain)', value: 'es-ES' },
+			{ label: 'Catalan', value: 'ca-ES' },
+			{ label: 'German', value: 'de-DE' },
+			{ label: 'Italian', value: 'it-IT' },
+			{ label: 'French', value: 'fr-FR' },
+			{ label: 'Swedish', value: 'sv-SE' },
+			{ label: 'Indonesian', value: 'id-ID' },
+			{ label: 'Polish', value: 'pl-PL' },
+			{ label: 'Japanese', value: 'ja-JP' },
+			{ label: 'Traditional Chinese (Taiwan)', value: 'zh-TW' },
+			{ label: 'Simplified Chinese (China)', value: 'zh-CN' },
+			{ label: 'Korean', value: 'ko-KR' },
+			{ label: 'Thai', value: 'th-TH' },
+			{ label: 'Dutch', value: 'nl-NL' },
+			{ label: 'Hungarian', value: 'hu-HU' },
+			{ label: 'Vietnamese', value: 'vi-VN' },
+			{ label: 'Czech', value: 'cs-CZ' },
+			{ label: 'Danish', value: 'da-DK' },
+			{ label: 'Finnish', value: 'fi-FI' },
+			{ label: 'Ukrainian', value: 'uk-UA' },
+			{ label: 'Greek', value: 'el-GR' },
+			{ label: 'Romanian', value: 'ro-RO' },
+			{ label: 'Norwegian Bokmål', value: 'nb-NO' },
+			{ label: 'Slovak', value: 'sk-SK' },
+			{ label: 'Turkish', value: 'tr-TR' },
+			{ label: 'Russian', value: 'ru-RU' }    ] %}
+
+			{{ forms.field({
+			label: 'labelLangLocale'|t('convergine-pexels'),
+			instructions: 'instructionsLangLocale'|t('convergine-pexels'),
+			}, forms.select({
+			id: 'langLocale',
+			name: 'langLocale',
+			options: options,
+			value: selectedLanguage,
+			})
+			) }}
+		</div>
+
+
+
+		<div style="margin-top:50px;">
+			{{ 'convergineHelp'|t('convergine-pexels',{ url: 'https://plugins.convergine.com/plugins/pexels' })|raw }}
+		</div>
+	</div>
+	<div style="display: flex;  margin-top: 20px;">
+		<div>
+			<a href="https://www.convergine.com/">
+				<img src="{{ craft.app.assetManager.getPublishedUrl('@convergine/pexels/assets/dist/convergine.png', true) }}" alt="Convergine" title="Convergine" width="150">
+			</a>
+		</div>
+	</div>
+</div>
